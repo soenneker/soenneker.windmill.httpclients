@@ -1,20 +1,19 @@
 using Soenneker.Windmill.HttpClients.Abstract;
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Windmill.HttpClients.Tests;
 
-[Collection("Collection")]
-public sealed class WindmillOpenApiHttpClientTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public sealed class WindmillOpenApiHttpClientTests : HostedUnitTest
 {
     private readonly IWindmillOpenApiHttpClient _httpclient;
 
-    public WindmillOpenApiHttpClientTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public WindmillOpenApiHttpClientTests(Host host) : base(host)
     {
         _httpclient = Resolve<IWindmillOpenApiHttpClient>(true);
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
