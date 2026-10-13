@@ -30,7 +30,7 @@ public sealed class WindmillOpenApiHttpClient : IWindmillOpenApiHttpClient
     {
         return _httpClientCache.Get(_cacheKey, (config: _config, baseUrl: _config["Windmill:ClientBaseUrl"] ?? _prodBaseUrl), static state =>
         {
-            string token = state.config["Windmill:Token"] ?? state.config.GetValueStrict<string>("Windmill:ApiKey");
+            string token = state.config["Windmill:Token"] ?? state.config.GetStringStrict("Windmill:ApiKey");
             string authHeaderName = state.config["Windmill:AuthHeaderName"] ?? "Authorization";
             string authHeaderValueTemplate = state.config["Windmill:AuthHeaderValueTemplate"] ?? "Bearer {token}";
             string authHeaderValue = authHeaderValueTemplate.Replace("{token}", token, StringComparison.Ordinal);
